@@ -31,7 +31,7 @@ export default {
       }
       this.$socket.emit('userLogin',payload)
       localStorage.setItem('user_name', this.userName)
-      this.$router.push({path: '/about'})
+      this.$router.push({path: '/room'})
     }
   }
 };

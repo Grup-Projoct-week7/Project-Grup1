@@ -1,6 +1,7 @@
 <template>
   <div class="container justify-content-center border p-5 flex">
       <div class="row">
+        <Player/>
           <div class="col-3" v-if="$store.state.playGames === true">
               <BaseTimer/>
           </div>
@@ -22,12 +23,14 @@
 
 <script>
 import BaseTimer from "@/components/BaseTimer";
+import Player from "@/components/Player.vue";
 
 export default {
   name: "QuestionBoard",
   props: ['song'],
   components: {
-    BaseTimer
+    BaseTimer,
+    Player
   },
   methods: {
     changePlay() {
