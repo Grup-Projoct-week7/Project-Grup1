@@ -6,11 +6,11 @@
           </div>
           <div class="col title p-2">
             <audio v-if="$store.state.play === true" controls autoplay> 
-                <source src="https://srv-file9.gofile.io/downloadStore/srv-store1/xW5Jl3/c-13039fed16a173733f227b0bec631034-12.mp3" type="audio/mpeg"> 
+                <source src="https://srv-file16.gofile.io/downloadStore/srv-store5/y8VwaJ/babyshark.mp3" type="audio/mpeg"> 
             </audio>
             <h1 v-if="$store.state.play === false">Waiting for other players</h1>
             <center v-if="$store.state.play === true">
-              <h1>Whats Song is this ?</h1> 
+              <h1>Whats Song is this ?</h1>
               <!-- <div class="card col-6 mt-5 p-3 ">
                   <h4> Hint <hr></h4> 
               </div> -->
@@ -23,12 +23,14 @@
 
 <script>
 import BaseTimer from "@/components/BaseTimer";
+import Player from "@/components/Player.vue";
 
 export default {
   name: "QuestionBoard",
   props: ['song'],
   components: {
-    BaseTimer
+    BaseTimer,
+    Player
   },
   methods: {
     changePlay() {
