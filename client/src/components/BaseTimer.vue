@@ -116,8 +116,8 @@ export default {
 <style scoped lang="scss">
 .base-timer {
   position: relative;
-  // width: 300px;
-  // height: 300px;
+  width: 170px;
+  // height: 170px;
 
   &__svg {
     transform: scaleX(-1);

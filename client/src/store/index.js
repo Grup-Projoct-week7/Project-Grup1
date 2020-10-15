@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     users: [],
     messages: [],
-    playGames:false,
+    play:false,
     songs: [
       {
         title: 'lose yourself',
@@ -28,7 +28,7 @@ export default new Vuex.Store({
      state.messages = data
     },
     'CHANGE-PLAY'(state) {
-      state.playGames = true
+      state.play = true
     }
     
   },

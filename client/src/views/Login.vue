@@ -1,14 +1,16 @@
 <template>
   <div class="home">
-    <h1>input your name</h1>
-    <img
-      alt="Vue logo"
-      src="https://avatars.dicebear.com/api/avataaars/sdsdaa.svg?w=100&h=100&top[]=hat"
-    />
-    <form @submit.prevent="loginName">
-      <input type="text" v-model="userName" id="" />
-      <input type="submit" name="" id="" />
-    </form>
+    <div class="container mt-5">
+      <h1>Whats your name ?</h1>
+      <img
+        alt="Vue logo"
+        src="https://avatars.dicebear.com/api/avataaars/sdsdaa.svg?w=100&h=100&top[]=hat"
+      />
+      <form @submit.prevent="loginName">
+        <input type="text" class="input-form" v-model="userName" id="" />
+        <input type="submit" class="btn btn-outline-primary" name="" id="" value="Submit name"/>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -31,7 +33,7 @@ export default {
       }
       this.$socket.emit('userLogin',payload)
       localStorage.setItem('user_name', this.userName)
-      this.$router.push({path: '/about'})
+      this.$router.push({path: '/room'})
     }
   }
 };

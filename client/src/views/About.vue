@@ -18,7 +18,7 @@
     <div v-for="(msg, i) in messages" :key="i">
       <h1>{{ msg.username }}</h1>
       <p>{{ msg.message }}</p>
-      <!-- <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=50&h=50&top[]=hat`"> -->
+      <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=50&h=50&top[]=hat`">
     </div>
   </div>
 </template>
