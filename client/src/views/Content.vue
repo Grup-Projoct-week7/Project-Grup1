@@ -14,24 +14,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(user, i) in users" v-bind:key="i">
-              <th scope="row">{{i+1}}</th>
-              <td>{{user.username}}</td>
-            </tr>
+            <List v-for="(user, i) in users" v-bind:key="i" v-bind:user="user" v-bind:index="i"></List>
           </tbody>
         </table>
       </div>
       <div class="container border border-dark">
-        <div class="container border border-secondary d-flex flex-row" v-for="(answer, index) in answers" v-bind:key=index>
-          <h6>{{answer.username}}</h6>
-          <p>{{answer.answer}}</p>
+        <div class="container">
+          <AnswerBox v-for="(answer, index) in answers" v-bind:key=index :answer="answer"></AnswerBox>
+          <form class="my-3" v-on:submit.prevent="submitAnswer">
+            <div class="form-group d-flex flex-row">
+              <input type="text" class="form-control" v-model="answer">
+              <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+          </form>
         </div>
-        <form class="my-3" v-on:submit.prevent="submitAnswer">
-          <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control" v-model="answer">
-            <button type="submit" class="btn btn-primary">Send</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
@@ -39,7 +35,8 @@
 
 <script>
 // @ is an alias to /src
-
+import List from '../components/ListOfPlayers.vue'
+import AnswerBox from '../components/AnswerBox.vue'
 
 export default {
   name: 'Home',
@@ -50,6 +47,10 @@ export default {
       answer: '',
       answers: []
     }
+  },
+  components: {
+    AnswerBox,
+    List
   },
   methods: {
     submitAnswer () {
