@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <h1>input ypur name</h1>
+    <img alt="Vue logo" src="https://avatars.dicebear.com/api/avataaars/sdsdaa.svg?w=100&h=100&top[]=hat">
+    <form @submit.prevent="loginName">
+    <input type="text" v-model="userName"  id="">
+    <input type="submit" name="" id="">
+    </form>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -11,8 +16,23 @@ import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      userName:''
+    }
+  },
   components: {
     HelloWorld
+  },
+  methods: {
+    loginName () {
+      let payload = {
+        userName: this.userName
+      }
+      this.$socket.emit('userLogin',payload)
+      localStorage.setItem('user_name', this.userName)
+      this.$router.push({path: '/about'})
+    }
   }
 }
 </script>
