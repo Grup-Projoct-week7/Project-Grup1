@@ -11,6 +11,7 @@ app.use(express.json())
 
 let users=[]
 let messages = []
+let answers = []
 io.on('connection', (socket) => {
     console.log('connect new user');
 
@@ -26,6 +27,12 @@ io.on('connection', (socket) => {
         io.emit('CHAT-USER', messages)
         console.log(messages);
     })
+
+    socket.on('sendAnswer', data => {
+        console.log(data)
+        answers.push(data)
+        io.emit('sentAnswer', answers)
+      })
 
     socket.on('disconnect', () => {
         console.log();
