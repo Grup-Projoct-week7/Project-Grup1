@@ -6,8 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     users: [],
+    ready: false,
+    readyCount: 0,
     messages: [],
     play:false,
+    qboard: {
+      song_url : 'https://srv-file2.gofile.io/downloadStore/srv-store3/llcq4S/kopisodik.mp3',
+      text: 'What song is this ?'
+    },
     songs: [
       {
         title: 'lose yourself',
@@ -27,9 +33,31 @@ export default new Vuex.Store({
     'SOCKET_CHAT-USER'(state, data) {
      state.messages = data
     },
-    'CHANGE-PLAY'(state) {
+    'SOCKET_PLAYER-READY'(state, data) {
+     state.readyCount = data
+    },
+    'SOCKET_CHANGE-PLAY'(state) {
+      console.log("playy");
       state.play = true
-    }
+    },
+    'CHANGE-STATUS'(state , data) {
+      if(state.readyCount<0){
+        state.readyCount = 0
+      }
+      if(data == true){
+        state.readyCount ++
+      }else{
+        if(state.readyCount>=0){
+          if(state.readyCount<0){
+            state.readyCount = 0
+          }else{
+            state.readyCount --
+          }
+        }
+      }
+      state.ready = data
+    },
+
     
   },
   actions: {
