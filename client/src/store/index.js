@@ -5,6 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    users: [],
+    messages: [],
+    playGames:false,
     songs: [
       {
         title: 'lose yourself',
@@ -17,6 +20,17 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    'SOCKET_USER-SUCCESS-LOGIN'(state, data) {
+      // state.users.push(data[data.length-1])
+      state.users = data
+    },
+    'SOCKET_CHAT-USER'(state, data) {
+     state.messages = data
+    },
+    'CHANGE-PLAY'(state) {
+      state.playGames = true
+    }
+    
   },
   actions: {
   },
