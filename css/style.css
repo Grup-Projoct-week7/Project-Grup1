@@ -91,8 +91,7 @@ body{
     background-color: white;
     margin: .7em;
     border-radius: 10px;
-
-
+    overflow-y: scroll;
 }
 
 .main-board-right {
@@ -104,7 +103,9 @@ body{
 
     
 }
-
+.chat-title{
+    position: absolute;
+}
 .main-board-right-top{
     background-color: white;
     height: 60vh;
@@ -129,6 +130,8 @@ body{
     height: 80%;
     margin: 10px;
     border-radius: 10px;
+    overflow-y: scroll;
+
 }
 .answer-input{
     display: flex;
@@ -146,6 +149,8 @@ body{
     height: 80%;
     margin: 10px;
     border-radius: 10px;
+    overflow-y: scroll;
+
 }
 .chat-input{
     display: flex;
@@ -161,9 +166,36 @@ body{
     border-radius: 10px;
     background-color: white;
     border-width: 4px;
-    height: 30px;
+    height: 50px;
+    width: 400px;
     border-color: rgba(0, 0, 0, .3);
     font-size: 20px;
+}
+.answer-text{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.avatar-card{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    height: 100px;
+    width: 100%;
+    
+}
+.avatar-img{
+    border-radius: 100px;
+    width: 33%;
+
+}
+.avatar-info{
+    margin-top: 15px;
+}
+
+span{
+    font-size: 20px;
+    font-weight: bold;
+    color: #1362F6;
 }
 
 
