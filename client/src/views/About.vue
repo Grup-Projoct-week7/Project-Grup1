@@ -3,6 +3,7 @@
     <p>welcome {{ username }}</p>
     <div v-for="(user, index) in users" :key="index">
       <h1>{{ user.userName }}</h1>
+      <p>{{user.status}}, {{user.score}}</p>
       <img
         alt="Vue logo"
         :src="
@@ -49,7 +50,7 @@ export default {
   },
   created() {
     this.username = localStorage.getItem("user_name");
-    // userSuccesLogin()
+    this.users
   }
 }
 </script>
