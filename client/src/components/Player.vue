@@ -4,6 +4,7 @@
       <p> {{ username }}</p>
       <div v-for="(user, index) in users" :key="index" class="row flex">
         <h3>{{ user.userName }}</h3>
+        <h3> Points: {{ user.score }}</h3>
         <img
           alt="Vue logo"
           :src="

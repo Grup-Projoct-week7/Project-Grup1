@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
     })
     socket.on('readyCheck', data => { 
         ready = ready + data
-        console.log(ready);
+        console.log('players who are ready', ready);
         io.emit('PLAYER-READY', ready)
     })
     socket.on('loadNextSong', data => {  

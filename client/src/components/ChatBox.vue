@@ -22,7 +22,7 @@
                 <input type="text" v-model="chatUser" />
           </div>
           <div class="col-3">
-            <input type="submit" />
+            <input type="submit" value="Answer" />
           </div>
       </form>
     </div>
