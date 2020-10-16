@@ -23,8 +23,8 @@
       </div>
       <div class="avatar-info">
         <span>{{ username }}</span
-        ><br />
-        <!-- <span>SCORE: 10</span> -->
+        >
+        <span class="ml-3">Score : {{user.score}}</span>
       </div>
     </div>
   </div>

@@ -62,12 +62,12 @@
                     </div>
                     <div class="content-lt-input">
                         <label for=""></label>
-                        <input type="text" class="text" placeholder="YOUR NICKNAME">
+                        <input type="text" v-model="userName" class="text" placeholder="YOUR NICKNAME">
                     </div>
                 </div>
                 <div class="icon-btn">
                     <div class="content-lt-input-btn">
-                        <img src="../assets/Group 6.svg" alt="" style="width: 15em;">
+                        <img src="../assets/Group 6.svg" @click="loginName" alt="" style="width: 15em;">
                     </div>
                     <div>
                         <img src="../assets//Group 11.svg" alt="" width="350px">
@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     loginName() {
+      console.log(this.userName);
       let payload = {
         userName: this.userName,
         status: false,
