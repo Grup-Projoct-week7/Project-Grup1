@@ -13,10 +13,14 @@ let users=[]
 let messages = []
 let ready = 0
 let answers = []
+var allClients = [];
 io.on('connection', (socket) => {
     console.log('connect new user');
 
+    allClients.push(socket);
+
     socket.on('userLogin', (data) => {
+        socket.nickName = data.userName
         users.push(data)
         console.log(users);
 
@@ -41,7 +45,7 @@ io.on('connection', (socket) => {
     })
     socket.on('readyCheck', data => { 
         ready = ready + data
-        console.log(ready);
+        console.log('players who are ready', ready);
         io.emit('PLAYER-READY', ready)
     })
     socket.on('loadNextSong', data => {  
@@ -50,9 +54,9 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        console.log();
-        // socket.rooms === {}
         console.log('dc');
+        console.log(socket.nickName);
+           users = users.filter(el => el.userName !== socket.nickName)
       });
 })
 

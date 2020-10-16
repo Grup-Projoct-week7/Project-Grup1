@@ -5,10 +5,10 @@
             <div v-if="msg.username === localstorage" class="row flex-row text-right">
                 <p>{{ msg.message }}</p>
                 <p>{{ msg.username }}</p>
-                <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=50&h=50&top[]=hat`" class="col3">
+                <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=20&h=20&top[]=hijab`" class="col3">
             </div>
             <div v-if="msg.username !== localstorage" class="row flex-row">
-                <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=50&h=50&top[]=hat`" class="col3">
+                <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=20&h=20&top[]=hijab`" class="col3">
                 <p>{{ msg.username }}</p>
                 <div class="ml-3">
                     <p>{{ msg.message }}</p>
@@ -22,7 +22,7 @@
                 <input type="text" v-model="chatUser" />
           </div>
           <div class="col-3">
-            <input type="submit" />
+            <input type="submit" value="Answer" />
           </div>
       </form>
     </div>

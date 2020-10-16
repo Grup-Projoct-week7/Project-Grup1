@@ -2,16 +2,16 @@
   <!-- <div class="container">
     <QuestionBoard class="col-8"/>
     {{readyCheck}} player ready
-    <a href="#" class="btn btn-outline-danger"  @click="exit">Exit Game</a>
-    <a href="#" class="btn btn-outline-info" v-if="this.$store.state.ready == false" @click="ready">Ready</a>
-    <a href="#" class="btn btn-outline-danger" v-if="this.$store.state.ready == true"  @click="unready">Unready</a>
+    <a href="#" class="btn btn-outline-danger"  @click.prevent="exit">Exit Game</a>
+    <a href="#" class="btn btn-outline-info" v-if="this.$store.state.ready == false" @click.prevent="ready">Ready</a>
+    <a href="#" class="btn btn-outline-danger" v-if="this.$store.state.ready == true"  @click.prevent="unready">Unready</a>
     
     <a href="#" class="btn btn-info"  @click="nextSong">next song</a>
     <div class="row" >
       <div class="col player-container">
         <Player/>
       </div>
-      <div class="col chat-container"> 
+      <div class="col chat-container"  > 
         <ChatBox/>
       </div>
     </div>
@@ -52,9 +52,10 @@
 </template>
 
 <script>
-import QuestionBoard from "@/components/BoardQuestion.vue";
-import Player from "@/components/Player.vue";
-import ChatBox from "@/components/ChatBox.vue";
+import QuestionBoard from '@/components/BoardQuestion.vue' 
+import Player from '@/components/Player.vue' 
+import ChatBox from '@/components/ChatBox.vue' 
+import WinnerBoard from '@/components/WinnerBoard.vue' 
 
 export default {
   name: "GameRoom",
