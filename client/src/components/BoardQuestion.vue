@@ -1,11 +1,11 @@
 <template>
-  <div class="container justify-content-center border p-5 flex">
+  <div class="main-board-right-top">
       <div class="row">
           <div class="col-3" v-if="$store.state.play === true">
               <BaseTimer :timeInput='5' :type="song"/>
           </div> 
           <div class="col title p-2">
-            <audio v-if="$store.state.play === true" controls autoplay> 
+            <audio v-if="$store.state.play === true" autoplay> 
                 <source :src="qboard.song_url" type="audio/mpeg"> 
             </audio>
             <h1 v-if="$store.state.play === false">Waiting for other players</h1>
@@ -17,7 +17,7 @@
             </center> 
             <div v-if="$store.state.play == 'load'">
                <h1> Load Song</h1>
-              <BaseTimer :timeInput='5' :type="load"/>
+              <BaseTimer :timeInput='3' :type="load"/>
             </div>
  
           </div>
@@ -28,13 +28,15 @@
 <script>
 import BaseTimer from "@/components/BaseTimer";
 import Player from "@/components/Player.vue";
+import WinnerBoard from "@/components/WinnerBoard.vue";
 
 export default {
   name: "QuestionBoard",
   props: ['song'],
   components: {
     BaseTimer,
-    Player
+    Player,
+    WinnerBoard
   },
   data (){
     return {

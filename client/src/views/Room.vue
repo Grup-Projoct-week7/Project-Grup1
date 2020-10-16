@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-      <WinnerBoard v-if="this.$store.state.play === 'finished'"/>
+  <!-- <div class="container">
     <QuestionBoard class="col-8"/>
     {{readyCheck}} player ready
     <a href="#" class="btn btn-outline-danger"  @click.prevent="exit">Exit Game</a>
@@ -16,8 +15,41 @@
         <ChatBox/>
       </div>
     </div>
-  </div>
+  </div> -->
+  <div class="container main-board">
+    <WinnerBoard v-if="this.$store.state.play == 'finished'" />
+    <Player />
 
+    <div class="main-board-right">
+      <div>
+        <QuestionBoard class="col-8" />
+        {{ readyCheck }} player ready
+        <a href="#" class="btn btn-outline-danger" @click="exit">Exit Game</a>
+        <a
+          href="#"
+          class="btn btn-outline-info"
+          v-if="this.$store.state.ready == false"
+          @click="ready"
+          >Ready</a
+        >
+        <a
+          href="#"
+          class="btn btn-outline-danger"
+          v-if="this.$store.state.ready == true"
+          @click="unready"
+          >Unready</a
+        >
+
+        <a href="#" class="btn btn-info" @click="nextSong">next song</a>
+      </div>
+      <div class="main-board-right-bot">
+        <div class="chat">
+          <ChatBox></ChatBox>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -27,7 +59,7 @@ import ChatBox from '@/components/ChatBox.vue'
 import WinnerBoard from '@/components/WinnerBoard.vue' 
 
 export default {
-  name: 'GameRoom',
+  name: "GameRoom",
   components: {
     QuestionBoard,
     Player,
@@ -35,38 +67,37 @@ export default {
     WinnerBoard
   },
   methods: {
-    exit () {
-      localStorage.clear()
-      this.$router.push('/')
+    exit() {
+      localStorage.clear();
+      this.$router.push("/");
     },
-    ready () {
-      console.log(this.users); 
-      this.$store.commit('CHANGE-STATUS',true)  
-        this.$socket.emit("readyCheck", 1); 
+    ready() {
+      console.log(this.users);
+      this.$store.commit("CHANGE-STATUS", true);
+      this.$socket.emit("readyCheck", 1);
     },
-    unready () {
-      console.log(this.users); 
-      this.$store.commit('CHANGE-STATUS',false)  
-      this.$socket.emit("readyCheck", -1); 
+    unready() {
+      console.log(this.users);
+      this.$store.commit("CHANGE-STATUS", false);
+      this.$socket.emit("readyCheck", -1);
     },
     changePlay() {
-      this.$socket.emit("startGame"); 
+      this.$socket.emit("startGame");
     },
     nextSong() {
-      this.$store.commit("changeSong"); 
-    }
-
+      this.$store.commit("changeSong");
+    },
   },
   watch: {
     readyCheck(newValue) {
       console.log(newValue);
       console.log("check");
-      if (newValue === this.users.length ) {
+      if (newValue === this.users.length) {
         console.log("START!");
         // this.changePlay()
         this.$socket.emit("startGame");
       }
-    }
+    },
   },
   computed: {
     users() {
@@ -78,25 +109,22 @@ export default {
     readyCheck() {
       return this.$store.state.readyCount;
     },
-    readyB () {
-      if(this.$store.state.ready == true){
-        return 'Unready'
-      }else{
-        return 'Ready'
+    readyB() {
+      if (this.$store.state.ready == true) {
+        return "Unready";
+      } else {
+        return "Ready";
       }
-
-    }
+    },
   },
   created() {
-    this.$store.commit('CHANGE-STATUS',false)  
-  }
-}
+    this.$store.commit("CHANGE-STATUS", false);
+  },
+};
 </script>
 
 <style scoped>
-
 QuestionBoard {
   max-height: 200px;
 }
-
 </style>
