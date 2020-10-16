@@ -44,6 +44,10 @@ io.on('connection', (socket) => {
         console.log(ready);
         io.emit('PLAYER-READY', ready)
     })
+    socket.on('loadNextSong', data => {  
+        console.log('next song');
+        io.emit('NEXT-SONG')
+    })
 
     socket.on('disconnect', () => {
         console.log();

@@ -2,7 +2,7 @@
   <div class="container justify-content-center border p-5 flex">
       <div class="row">
           <div class="col-3" v-if="$store.state.play === true">
-              <BaseTimer time="20"/>
+              <BaseTimer :timeInput='20' :type="song"/>
           </div> 
           <div class="col title p-2">
             <audio v-if="$store.state.play === true" controls autoplay> 
@@ -15,6 +15,11 @@
                   <h4> Hint <hr></h4> 
               </div> -->
             </center> 
+            <div v-if="$store.state.play == 'load'">
+               <h1> Load Song</h1>
+              <BaseTimer :timeInput='5' :type="load"/>
+            </div>
+ 
           </div>
       </div> 
   </div>
@@ -30,6 +35,12 @@ export default {
   components: {
     BaseTimer,
     Player
+  },
+  data (){
+    return {
+      song: 'song',
+      load: 'load',
+    }
   },
   methods: { 
   },

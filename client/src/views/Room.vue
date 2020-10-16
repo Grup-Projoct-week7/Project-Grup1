@@ -6,6 +6,7 @@
     <a href="#" class="btn btn-outline-info" v-if="this.$store.state.ready == false" @click="ready">Ready</a>
     <a href="#" class="btn btn-outline-danger" v-if="this.$store.state.ready == true"  @click="unready">Unready</a>
     
+    <a href="#" class="btn btn-info"  @click="nextSong">next song</a>
     <div class="row" >
       <div class="col player-container">
         <Player/>
@@ -47,16 +48,20 @@ export default {
     },
     changePlay() {
       this.$socket.emit("startGame"); 
+    },
+    nextSong() {
+      this.$store.commit("changeSong"); 
     }
 
   },
   watch: {
     readyCheck(newValue) {
+      console.log(newValue);
       console.log("check");
       if (newValue === this.users.length ) {
         console.log("START!");
-        this.changePlay()
-        // this.$socket.emit("startGame");
+        // this.changePlay()
+        this.$socket.emit("startGame");
       }
     }
   },
