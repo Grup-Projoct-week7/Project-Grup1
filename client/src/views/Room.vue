@@ -17,6 +17,7 @@
     </div>
   </div> -->
   <div class="container main-board">
+    <WinnerBoard v-if="this.$store.state.play == 'finished'" />
     <Player />
 
     <div class="main-board-right">
@@ -63,6 +64,7 @@ export default {
     QuestionBoard,
     Player,
     ChatBox,
+    WinnerBoard
   },
   methods: {
     exit() {
