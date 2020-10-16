@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+      <WinnerBoard v-if="this.$store.state.play === 'finished'"/>
     <QuestionBoard class="col-8"/>
     {{readyCheck}} player ready
     <a href="#" class="btn btn-outline-danger"  @click.prevent="exit">Exit Game</a>
@@ -11,7 +12,7 @@
       <div class="col player-container">
         <Player/>
       </div>
-      <div class="col chat-container"> 
+      <div class="col chat-container"  > 
         <ChatBox/>
       </div>
     </div>
@@ -23,13 +24,15 @@
 import QuestionBoard from '@/components/BoardQuestion.vue' 
 import Player from '@/components/Player.vue' 
 import ChatBox from '@/components/ChatBox.vue' 
+import WinnerBoard from '@/components/WinnerBoard.vue' 
 
 export default {
   name: 'GameRoom',
   components: {
     QuestionBoard,
     Player,
-    ChatBox
+    ChatBox,
+    WinnerBoard
   },
   methods: {
     exit () {
