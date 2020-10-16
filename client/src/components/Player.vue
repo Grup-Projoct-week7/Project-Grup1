@@ -23,7 +23,7 @@
         <img src="../assets/Line 1.svg" alt="" />
       </div>
       <div class="avatar-info">
-        <span>{{ username }}</span
+        <span>{{ user.userName }}</span
         >
         <span class="ml-3">Score : {{user.score}}</span>
       </div>

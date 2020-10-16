@@ -2,7 +2,7 @@
   <div class="main-board-right-top">
       <div class="row">
           <div class="col-3" v-if="$store.state.play === true">
-              <BaseTimer :timeInput='5' :type="song"/>
+              <BaseTimer :timeInput='15' :type="song"/>
           </div> 
           <div class="col title p-2">
             <audio v-if="$store.state.play === true" autoplay> 
