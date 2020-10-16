@@ -39,8 +39,7 @@ const COLOR_CODES = {
   }
 };
 
-const TIME_LIMIT = 20;
-
+let TIME_LIMIT = 20
 export default {
   data() {
     return {
@@ -48,10 +47,14 @@ export default {
       timerInterval: null
     };
   },
+  props:['timeInput','type'],
 
   computed: {
     circleDasharray() {
       return `${(this.timeFraction * FULL_DASH_ARRAY).toFixed(0)} 283`;
+    },
+    timeCountdown(){
+      return this.$store.state.timeCountdown
     },
 
     formattedTimeLeft() {
@@ -67,12 +70,12 @@ export default {
     }, 
 
     timeLeft() {
-      return TIME_LIMIT - this.timePassed;
+      return this.timeInput - this.timePassed;
     },
 
     timeFraction() {
-      const rawTimeFraction = this.timeLeft / TIME_LIMIT;
-      return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+      const rawTimeFraction = this.timeLeft / this.timeInput;
+      return rawTimeFraction - (1 / this.timeInput) * (1 - rawTimeFraction);
     },
 
     remainingPathColor() {
@@ -102,7 +105,13 @@ export default {
 
   methods: {
     onTimesUp() {
-        console.log("TimesUP");
+      console.log("TimesUP"); 
+      if(this.type == 'load'){
+        console.log(this.type);
+        this.$socket.emit("startGame"); 
+      }else{
+        this.$socket.emit("loadNextSong"); 
+      }
       clearInterval(this.timerInterval);
     },
 
@@ -116,8 +125,8 @@ export default {
 <style scoped lang="scss">
 .base-timer {
   position: relative;
-  // width: 300px;
-  // height: 300px;
+  width: 170px;
+  // height: 170px;
 
   &__svg {
     transform: scaleX(-1);
