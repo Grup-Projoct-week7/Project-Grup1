@@ -2,9 +2,9 @@
   <div class="container">
     <QuestionBoard class="col-8"/>
     {{readyCheck}} player ready
-    <a href="#" class="btn btn-outline-danger"  @click="exit">Exit Game</a>
-    <a href="#" class="btn btn-outline-info" v-if="this.$store.state.ready == false" @click="ready">Ready</a>
-    <a href="#" class="btn btn-outline-danger" v-if="this.$store.state.ready == true"  @click="unready">Unready</a>
+    <a href="#" class="btn btn-outline-danger"  @click.prevent="exit">Exit Game</a>
+    <a href="#" class="btn btn-outline-info" v-if="this.$store.state.ready == false" @click.prevent="ready">Ready</a>
+    <a href="#" class="btn btn-outline-danger" v-if="this.$store.state.ready == true"  @click.prevent="unready">Unready</a>
     
     <a href="#" class="btn btn-info"  @click="nextSong">next song</a>
     <div class="row" >

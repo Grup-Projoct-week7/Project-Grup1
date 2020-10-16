@@ -3,6 +3,10 @@ import Vuex, { Store } from 'vuex'
 
 Vue.use(Vuex)
 
+const checkAnswer = (user_chat, song_title) => {
+  return user_chat === song_title
+}
+
 export default new Vuex.Store({
   state: {
     users: [],
@@ -27,7 +31,7 @@ export default new Vuex.Store({
         song_url: 'https://srv-file16.gofile.io/downloadStore/srv-store5/y8VwaJ/babyshark.mp3'
       },
       { 
-        title: 'Kopi sodik',
+        title: 'kopi sodik',
         song_url: 'https://srv-file2.gofile.io/downloadStore/srv-store3/llcq4S/kopisodik.mp3'
       }, 
     ]
@@ -39,6 +43,27 @@ export default new Vuex.Store({
     },
     'SOCKET_CHAT-USER'(state, data) {
      state.messages = data
+     let checked
+     state.messages.forEach(e => {
+       checked = checkAnswer(e.message, state.qboard.title)
+     })
+     if(checked){
+      console.log('Benar')
+      state.users.forEach(e =>{
+        if(e.userName == localStorage.user_name){
+          e.score += 10
+          console.log(e)
+        }
+        // console.log(e)
+        
+      })
+      // console.log(state.users)
+
+     }
+     else{
+      console.log('Salah')
+      // console.log(state.users)
+     }
     },
     'SOCKET_PLAYER-READY'(state, data) {
      state.readyCount = data
@@ -49,15 +74,22 @@ export default new Vuex.Store({
     },
     'SOCKET_NEXT-SONG'(state) { 
       state.play = 'load'
-      console.log(state.songCount);
-      // console.log(state.songs);
+      console.log("Urutan lagu", state.songCount);
+      console.log("Jumlah lagu", state.songs.length);
       console.log('change song to ', state.songs[state.songCount]);
       // state.qboard = state.songs[state.songCount]
       state.qboard.song_url = state.songs[state.songCount].song_url
       state.qboard.title = state.songs[state.songCount].title
-      console.log('playing : ',state.qboard)
+      console.log('playing : ', state.qboard)
       // state.play = true
-      state.songCount ++
+      if(state.songcount >= state.songs.length){
+        console.log('Game selesai')
+        // berhentikan SOCKET_NEXT-SONG dan panggil halaman skor
+      }
+      else{
+        state.songCount ++
+        console.log("Urutan lagu sekarang", state.songCount);
+      }
 
     }, 
     'CHANGE-PLAY'(state){
@@ -80,6 +112,17 @@ export default new Vuex.Store({
       }
       state.ready = data
     },
+    changeSong (state) {
+      if(state.songcount >= state.songs.length){
+        console.log('Game selesai')
+        // berhentikan SOCKET_NEXT-SONG dan panggil halaman skor
+      }
+      else{
+        state.songCount ++
+        console.log("Urutan lagu sekarang", state.songCount);
+      }
+    }
+    
 
     
   },
