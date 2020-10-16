@@ -44,19 +44,26 @@ export default new Vuex.Store({
     'SOCKET_CHAT-USER'(state, data) {
      state.messages = data
      let checked
-     state.messages.forEach(e => {
-       checked = checkAnswer(e.message, state.qboard.title)
-     })
+     let msg = data[data.length-1]
+    //  state.messages.forEach(e => {
+    //    checked = checkAnswer(e.message, state.qboard.title)
+
+    //  })
+    
+    checked = checkAnswer(msg.message, state.qboard.title)
      if(checked){
       console.log('Benar')
-      state.users.forEach(e =>{
-        if(e.userName == localStorage.user_name){
-          e.score += 10
-          console.log(e)
-        }
-        // console.log(e)
+      // console.log(state.messages);
+      let index = state.users.findIndex(item => item.userName === msg.username);
+      console.log(index,"<<<<<<<<<");
+      state.users[index].score += 10
+      // state.users.forEach(e =>{
+      //   if(e.userName == localStorage.user_name){
+      //     e.score = e.score + 10
+      //     console.log(e)
+      //   } 
         
-      })
+      // })
       // console.log(state.users)
 
      }
@@ -82,16 +89,15 @@ export default new Vuex.Store({
       state.qboard.title = state.songs[state.songCount].title
       console.log('playing : ', state.qboard)
       // state.play = true
-      if(state.songcount >= state.songs.length){
+      state.songCount ++
+      console.log("Urutan lagu sekarang", state.songCount, " == ", state.songs.length);
+      if(state.songCount >= state.songs.length){
         console.log('Game selesai')
+        state.play = 'finished' 
         // berhentikan SOCKET_NEXT-SONG dan panggil halaman skor
       }
-      else{
-        state.songCount ++
-        console.log("Urutan lagu sekarang", state.songCount);
-      }
-
-    }, 
+    },  
+    
     'CHANGE-PLAY'(state){
       state.play = true 
     },
@@ -113,12 +119,12 @@ export default new Vuex.Store({
       state.ready = data
     },
     changeSong (state) {
-      if(state.songcount >= state.songs.length){
+      if(state.songcount > state.songs.length){
         console.log('Game selesai')
         // berhentikan SOCKET_NEXT-SONG dan panggil halaman skor
       }
       else{
-        state.songCount ++
+        // state.songCount ++
         console.log("Urutan lagu sekarang", state.songCount);
       }
     }
