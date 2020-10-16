@@ -11,6 +11,7 @@ app.use(express.json())
 
 let users=[]
 let messages = []
+let ready = 0
 let answers = []
 io.on('connection', (socket) => {
     console.log('connect new user');
@@ -33,6 +34,20 @@ io.on('connection', (socket) => {
         answers.push(data)
         io.emit('sentAnswer', answers)
       })
+
+    socket.on('startGame', data => { 
+        console.log('start game')
+        io.emit('CHANGE-PLAY')
+    })
+    socket.on('readyCheck', data => { 
+        ready = ready + data
+        console.log(ready);
+        io.emit('PLAYER-READY', ready)
+    })
+    socket.on('loadNextSong', data => {  
+        console.log('next song');
+        io.emit('NEXT-SONG')
+    })
 
     socket.on('disconnect', () => {
         console.log();

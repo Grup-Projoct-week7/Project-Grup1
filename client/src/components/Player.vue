@@ -1,24 +1,15 @@
 <template>
-  <div class="about">
-    <p>welcome {{ username }}</p>
-    <div v-for="(user, index) in users" :key="index">
-      <h1>{{ user.userName }}</h1>
-      <img
-        alt="Vue logo"
-        :src="
-          `https://avatars.dicebear.com/api/avataaars/${user.userName}.svg?w=100&h=100&top[]=hijab`"/>
-    </div>
-    <div>
-      <form @submit.prevent="sendMessage">
-        <input type="text" v-model="chatUser" />
-        <input type="submit" />
-      </form>
-    </div>
-    <div v-for="(msg, i) in messages" :key="i">
-      <h1>{{ msg.username }}</h1>
-      <p>{{ msg.message }}</p>
-      <!-- <img alt="Vue logo" :src="`https://avatars.dicebear.com/api/avataaars/${msg.username}.svg?w=50&h=50&top[]=hat`"> -->
-    </div>
+  <div class="player border flex-row ml-5 5-4" >
+    <!-- <div class="border col-12 " > -->
+      <p> {{ username }}</p>
+      <div v-for="(user, index) in users" :key="index" class="row flex">
+        <h3>{{ user.userName }}</h3>
+        <img
+          alt="Vue logo"
+          :src="
+            `https://avatars.dicebear.com/api/avataaars/${user.userName}.svg?w=70&h=70&top[]=hijab`"/>
+      </div>
+    <!-- </div>  -->
   </div>
 </template>
 <script>
@@ -35,7 +26,7 @@ export default {
     },
     messages() {
       return this.$store.state.messages;
-    }
+    },
   },
   methods: {
     sendMessage() {
@@ -45,7 +36,7 @@ export default {
       };
       this.$socket.emit("sendMessage", chat);
       this.chatUser = "";
-    }
+    },
   },
   created() {
     this.username = localStorage.getItem("user_name");
@@ -54,4 +45,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style > 
+.player {
+  padding:15px;
+  min-width: 220px;
+  max-width: 250px;
+}
+
+</style>
